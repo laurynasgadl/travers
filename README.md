@@ -1,6 +1,6 @@
 # Travers
 
-Travers is a small PHP library meant for easily traversing arrays using tokenized path strings.
+Travers is a small PHP package meant for easily traversing arrays using tokenized path strings.
 
 ```php
 $params = [

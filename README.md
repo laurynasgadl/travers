@@ -23,18 +23,7 @@ Travers::get('fruits.apple.red', $params); // null
 
 ## Installation
 
-In your composer.json add the repository & dependency:
-```json
-"repositories":[
-    {
-        "type": "vcs",
-        "url": "git@github.com:laurynasgadl/travers.git"
-    }
-],
-"require": {
-    "laurynasgadl/travers": "^1.0"
-}
-```
+`composer require laurynasgadl/travers`
 
 ## Documentation
 ### Initializing

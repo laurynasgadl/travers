@@ -4,8 +4,8 @@ namespace Luur\Exceptions;
 
 class BranchNotFoundException extends \Exception
 {
-    public function __construct(string $branch)
+    public function __construct($branch)
     {
-        $this->message = "Array does not contain a valid branch `$branch`";
+        parent::__construct("Array does not contain a valid branch `$branch`");
     }
 }

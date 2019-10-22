@@ -29,7 +29,7 @@ class Travers
      * @param bool $shouldFail
      * @param string $delimiter
      */
-    public function __construct(array $tree = [], bool $shouldFail = false, string $delimiter = self::DEFAULT_DELIMITER)
+    public function __construct(array $tree = [], $shouldFail = false, $delimiter = self::DEFAULT_DELIMITER)
     {
         $this->setTree($tree);
         $this->setShouldFail($shouldFail);
@@ -39,7 +39,7 @@ class Travers
     /**
      * @param bool $shouldFail
      */
-    public function setShouldFail(bool $shouldFail): void
+    public function setShouldFail($shouldFail)
     {
         $this->shouldFail = $shouldFail;
     }
@@ -47,18 +47,20 @@ class Travers
     /**
      * @param string $path
      * @param array $tree
-     * @return null
+     * @return mixed|null
+     * @throws BranchNotFoundException
      */
-    public static function get(string $path, array $tree)
+    public static function get($path, array $tree)
     {
         return (new Travers($tree))->find($path);
     }
 
     /**
      * @param string $key
-     * @return null
+     * @return mixed|null
+     * @throws BranchNotFoundException
      */
-    public function find(string $key)
+    public function find($key)
     {
         return $this->parseParam($this->parseKeys($key), $this->tree);
     }
@@ -66,7 +68,7 @@ class Travers
     /**
      * @param array $keys
      * @param $data
-     * @return null
+     * @return mixed|null
      * @throws BranchNotFoundException
      */
     protected function parseParam(array $keys, $data)
@@ -86,10 +88,10 @@ class Travers
 
     /**
      * @param string $key
-     * @return null
+     * @return mixed|null
      * @throws BranchNotFoundException
      */
-    protected function handleFailure(string $key)
+    protected function handleFailure($key)
     {
         if ($this->shouldFail()) {
             throw new BranchNotFoundException($key);
@@ -101,7 +103,7 @@ class Travers
     /**
      * @return bool
      */
-    public function shouldFail(): bool
+    public function shouldFail()
     {
         return $this->shouldFail;
     }
@@ -110,7 +112,7 @@ class Travers
      * @param string $key
      * @return array
      */
-    protected function parseKeys(string $key): array
+    protected function parseKeys($key)
     {
         return explode($this->delimiter, $key);
     }
@@ -121,7 +123,7 @@ class Travers
      * @param array $tree
      * @return array
      */
-    public static function set(string $path, $value, array $tree): array
+    public static function set($path, $value, array $tree)
     {
         return (new Travers($tree))->change($path, $value);
     }
@@ -131,7 +133,7 @@ class Travers
      * @param $value
      * @return array
      */
-    public function change(string $key, $value): array
+    public function change($key, $value)
     {
         $this->setTree($this->setParam($this->parseKeys($key), $value, $this->tree));
         return $this->getTree();
@@ -167,7 +169,7 @@ class Travers
     /**
      * @return array
      */
-    public function getTree(): array
+    public function getTree()
     {
         return $this->tree;
     }
@@ -175,7 +177,7 @@ class Travers
     /**
      * @param array $tree
      */
-    public function setTree(array $tree): void
+    public function setTree(array $tree)
     {
         $this->tree = $tree;
     }
@@ -183,7 +185,7 @@ class Travers
     /**
      * @return string
      */
-    public function getDelimiter(): string
+    public function getDelimiter()
     {
         return $this->delimiter;
     }
@@ -191,7 +193,7 @@ class Travers
     /**
      * @param string $delimiter
      */
-    public function setDelimiter(string $delimiter): void
+    public function setDelimiter($delimiter)
     {
         $this->delimiter = $delimiter;
     }

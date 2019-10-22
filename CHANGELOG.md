@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.0] - 2019-10-22
+### Updated
+- Added compatibility with PHP versions 5.6 & higher
+
 ## [1.0.0] - 2019-06-20
 ### Added
 - Initial release

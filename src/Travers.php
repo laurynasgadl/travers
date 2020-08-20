@@ -55,6 +55,11 @@ class Travers
         return (new Travers($tree))->find($path);
     }
 
+    public static function remove($path, array $tree)
+    {
+        return (new Travers($tree))->removeParam($path);
+    }
+
     /**
      * @param string $key
      * @return mixed|null
@@ -63,6 +68,36 @@ class Travers
     public function find($key)
     {
         return $this->parseParam($this->parseKeys($key), $this->tree);
+    }
+
+    /**
+     * @param       $key
+     * @param array $tree
+     *
+     * @return array|mixed
+     *
+     */
+    protected function removeParam($key)
+    {
+        $result    = $this->tree;
+        $tmp       = &$result;
+        $keysArray = $this->parseKeys($key);
+        $keyCount  = count($keysArray);
+
+        while ($keyCount > 1) {
+            $keyCount--;
+            $key = array_shift($keysArray);
+
+            if (!is_array($tmp) || !array_key_exists($key, $tmp)) {
+                return $result;
+            }
+
+            $tmp = &$tmp[$key];
+        }
+
+        $key = array_shift($keysArray);
+        unset($tmp[$key]);
+        return $result;
     }
 
     /**

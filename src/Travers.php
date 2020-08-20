@@ -106,7 +106,7 @@ class Travers
             $key = array_shift($keysArray);
 
             if (!is_array($tmp) || !array_key_exists($key, $tmp)) {
-                return $this->shouldFail() ? $this->handleFailure($key) : $result;
+                return $this->handleFailure($key) ?: $result;
             }
 
             $tmp = &$tmp[$key];

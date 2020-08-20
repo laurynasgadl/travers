@@ -55,6 +55,12 @@ class Travers
         return (new Travers($tree))->find($path);
     }
 
+    /**
+     * @param       $path
+     * @param array $tree
+     *
+     * @return array|mixed
+     */
     public static function remove($path, array $tree)
     {
         return (new Travers($tree))->removeParam($path);

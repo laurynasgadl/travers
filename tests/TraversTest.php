@@ -85,6 +85,16 @@ class TraversTest extends TestCase
     }
 
     /**
+     * @dataProvider failingDataProvider
+     */
+    public function testThrowsExceptionOnRemove($path)
+    {
+        $this->expectException(BranchNotFoundException::class);
+        $trav = $this->createTraversInstance($this->tree, true);
+        $trav->remove($path);
+    }
+
+    /**
      * @dataProvider nonFailingDataProvider
      * @param string $path
      * @param $expected
@@ -125,7 +135,7 @@ class TraversTest extends TestCase
      */
     public function testRemoveValue(string $path)
     {
-        $tree = Travers::remove($path, $this->tree);
+        $tree = Travers::delete($path, $this->tree);
         $trav = $this->createTraversInstance($tree);
         $this->assertNull($trav->find($path));
     }
@@ -232,6 +242,9 @@ class TraversTest extends TestCase
             ],
             [
                 'food.fruits',
+            ],
+            [
+                'food',
             ]
         ];
     }

@@ -83,7 +83,7 @@ class Travers
      * @return array|mixed
      *
      */
-    protected function removeParam($key)
+    public function removeParam($key)
     {
         $result    = $this->tree;
         $tmp       = &$result;

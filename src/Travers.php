@@ -93,7 +93,7 @@ class Travers
      * @param array $keys
      * @param array $tree
      *
-     * @return array|mixed|null
+     * @return array|null
      * @throws BranchNotFoundException
      */
     protected function removeParam(array $keys, array $tree)

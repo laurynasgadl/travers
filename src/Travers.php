@@ -91,7 +91,7 @@ class Travers
 
     /**
      * @param array $keys
-     * @param array  $tree
+     * @param array $tree
      *
      * @return array|mixed|null
      * @throws BranchNotFoundException

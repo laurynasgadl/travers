@@ -75,7 +75,7 @@ class Travers
      */
     public function remove($path)
     {
-        $this->setTree($this->removeParam($path, $this->tree));
+        $this->setTree($this->removeParam($this->parseKeys($path), $this->tree));
         return $this->getTree();
     }
 
@@ -90,34 +90,30 @@ class Travers
     }
 
     /**
-     * @param string $key
+     * @param array $keys
      * @param array  $tree
      *
      * @return array|mixed|null
      * @throws BranchNotFoundException
      */
-    protected function removeParam($key, array $tree)
+    protected function removeParam(array $keys, array $tree)
     {
-        $tmp       = &$tree;
-        $keysArray = $this->parseKeys($key);
+        $tmp = &$tree;
+        while ($keys) {
+            $key = array_shift($keys);
 
-        while (count($keysArray) > 1) {
-            $key = array_shift($keysArray);
-
-            if (!is_array($tmp) || !array_key_exists($key, $tmp)) {
+            if (!is_string($key) || !is_array($tmp) || !array_key_exists($key, $tmp)) {
                 return $this->shouldFail() ? $this->handleFailure($key) : $tree;
             }
 
-            $tmp = &$tmp[$key];
+            if (!empty($keys)) {
+                $tmp = &$tmp[$key];
+                continue;
+            }
+
+            unset($tmp[$key]);
         }
 
-        $key = array_shift($keysArray);
-
-        if (!is_string($key) || !is_array($tmp) || !array_key_exists($key, $tmp)) {
-            return $this->shouldFail() ? $this->handleFailure($key) : $tree;
-        }
-
-        unset($tmp[$key]);
         return $tree;
     }
 

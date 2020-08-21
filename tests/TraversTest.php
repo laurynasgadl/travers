@@ -95,6 +95,20 @@ class TraversTest extends TestCase
     }
 
     /**
+     * @dataProvider failingDataProvider
+     *
+     * @param $path
+     *
+     * @throws BranchNotFoundException
+     */
+    public function testRemoveWithoutFailing($path)
+    {
+        $trav = $this->createTraversInstance($this->tree);
+        $tree = $trav->remove($path);
+        $this->assertEquals($this->tree, $tree);
+    }
+
+    /**
      * @dataProvider nonFailingDataProvider
      * @param string $path
      * @param $expected

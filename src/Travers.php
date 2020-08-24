@@ -56,6 +56,30 @@ class Travers
     }
 
     /**
+     * @param string $path
+     * @param array  $tree
+     *
+     * @return array
+     * @throws BranchNotFoundException
+     */
+    public static function delete($path, array $tree)
+    {
+        return (new Travers($tree))->remove($path);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return array
+     * @throws BranchNotFoundException
+     */
+    public function remove($path)
+    {
+        $this->setTree($this->removeParam($this->parseKeys($path), $this->tree));
+        return $this->getTree();
+    }
+
+    /**
      * @param string $key
      * @return mixed|null
      * @throws BranchNotFoundException
@@ -63,6 +87,34 @@ class Travers
     public function find($key)
     {
         return $this->parseParam($this->parseKeys($key), $this->tree);
+    }
+
+    /**
+     * @param array $keys
+     * @param array $tree
+     *
+     * @return array|null
+     * @throws BranchNotFoundException
+     */
+    protected function removeParam(array $keys, array $tree)
+    {
+        $tmp = &$tree;
+        while ($keys) {
+            $key = array_shift($keys);
+
+            if (!is_string($key) || !is_array($tmp) || !array_key_exists($key, $tmp)) {
+                return $this->shouldFail() ? $this->handleFailure($key) : $tree;
+            }
+
+            if (!empty($keys)) {
+                $tmp = &$tmp[$key];
+                continue;
+            }
+
+            unset($tmp[$key]);
+        }
+
+        return $tree;
     }
 
     /**

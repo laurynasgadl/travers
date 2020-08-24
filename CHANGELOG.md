@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.0] - 2020-08-24
+### Added
+- Added parameter removal functionality
+
 ## [1.1.0] - 2019-10-22
 ### Updated
 - Added compatibility with PHP versions 5.6 & higher

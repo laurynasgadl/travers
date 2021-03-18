@@ -1,7 +1,8 @@
 <?php
 
-namespace Luur;
+namespace Luur\Tests;
 
+use Luur\Travers;
 use Luur\Exceptions\BranchNotFoundException;
 use PHPUnit\Framework\TestCase;
 
@@ -12,7 +13,7 @@ class TraversTest extends TestCase
      */
     protected $tree;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

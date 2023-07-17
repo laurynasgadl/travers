@@ -166,7 +166,7 @@ class Travers
      */
     protected function parseKeys($key)
     {
-        return explode($this->delimiter, $key);
+        return explode($this->delimiter, $key ?? '');
     }
 
     /**

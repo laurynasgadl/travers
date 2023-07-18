@@ -1,8 +1,9 @@
 <?php
 
-namespace Luur;
+namespace Luur\Tests;
 
 use Luur\Exceptions\BranchNotFoundException;
+use Luur\Travers;
 use PHPUnit\Framework\TestCase;
 
 class TraversTest extends TestCase
